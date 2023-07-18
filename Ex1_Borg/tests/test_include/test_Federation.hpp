@@ -4,7 +4,15 @@
 #include <iostream>
 
 #include "test_WarpSystem.hpp"
-
+namespace Federation
+{
+    namespace Starfleet
+    {
+        class Ship;
+        class Captain;
+    }
+    class Ship;
+}
 namespace                           Federation
 {
     namespace                       Starfleet
@@ -21,12 +29,15 @@ namespace                           Federation
 
                 void                setupCore(WarpSystem::Core *core);
                 void                checkCore(void);
+
+                void                promote(Federation::Starfleet::Captain *captain);
             private:
-                int                 _length;
-                int                 _width;
-                std::string         _name;
-                short               _maxWarp;
-                WarpSystem::Core    *_core;
+                int                             _length;
+                int                             _width;
+                std::string                     _name;
+                short                           _maxWarp;
+                WarpSystem::Core                *_core;
+                Federation::Starfleet::Captain  *_captain;
         };
 
         class                       Captain

@@ -165,6 +165,21 @@ Test(Federation_Starfleet_Captain, test_Captain)//, .init = redirect_all_stdout)
     cr_assert(James.getAge() == 21);
 }
 
+Test(Federation_Starfleet_Ship, test_Ship_promote, .init = redirect_all_stdout)
+{
+    Federation::Starfleet::Ship 		UssKreog(289, 132, "Kreog", 6);
+	Federation::Starfleet::Captain 		James("James T. Kirk");
+
+    UssKreog.promote(&James);
+
+    cr_assert_stdout_eq_str(
+    "The ship USS Kreog has been finished.\n"
+    "It is 289 m in length and 132 m in width.\n"
+    "It can go to Warp 6!\n"
+    "James T. Kirk: I'm glad to be the captain of the USS Kreog.\n"
+    );
+}
+
 // Test(Main, test_main, .init = redirect_all_stdout)
 // {
 // 	Federation::Starfleet::Ship 	UssKreog(289, 132, "Kreog", 6);

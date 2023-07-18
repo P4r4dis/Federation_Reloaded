@@ -7,7 +7,7 @@ Federation::Starfleet::Ship::Ship(
     short maxWarp)
     :
     _length(length), _width(width), _name(name), _maxWarp(maxWarp),
-    _core(nullptr)
+    _core(nullptr), _captain(nullptr)
 {
     std::cout   << "The ship USS " << _name << " has been finished." 
                 << std::endl
@@ -91,4 +91,12 @@ int             Federation::Starfleet::Captain::getAge(void)
 void            Federation::Starfleet::Captain::setAge(int age)
 {
     _age = age;
+}
+
+void            Federation::Starfleet::Ship::promote(Captain *captain)
+{
+    _captain = captain;
+    std::cout   << _captain->getName()
+                << ": I'm glad to be the captain of the USS "
+                << _name << "." << std::endl;
 }
