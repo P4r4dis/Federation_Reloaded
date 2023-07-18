@@ -31,6 +31,17 @@ Test(Federation, test_Federation_Starfleet_Ship_constructor, .init = redirect_al
     );
 }
 
+Test(QuantumReactor, test_WarpSystem_QuantumReactor_constructor)//, .init = redirect_all_stdout)
+{
+    WarpSystem::QuantumReactor  QR;
+
+    cr_assert(QR.isStable() == true);
+    QR.setStability(false);
+    cr_assert(QR.isStable() == false);
+    QR.setStability(true);
+    cr_assert(QR.isStable() == true);
+}
+
 Test(Main, test_main)//, .init = redirect_all_stdout)
 {
 	cr_assert(1 == 1);
