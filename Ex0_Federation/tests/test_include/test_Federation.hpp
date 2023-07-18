@@ -20,6 +20,7 @@ namespace                           Federation
                 short               getMaxWarp(void) const;
 
                 void                setupCore(WarpSystem::Core *core);
+                void                checkCore(void);
             private:
                 int                 _length;
                 int                 _width;
@@ -39,6 +40,7 @@ namespace                           Federation
             std::string             getName(void) const;
 
             void                    setupCore(WarpSystem::Core *core);
+            void                    checkCore(void);
 
         private:
             int                     _length;
