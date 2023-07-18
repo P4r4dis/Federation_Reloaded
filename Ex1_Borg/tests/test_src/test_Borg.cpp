@@ -14,3 +14,11 @@ void    Borg::Ship::setupCore(WarpSystem::Core *core)
 {
     _core = core;
 }
+
+void    Borg::Ship::checkCore(void)
+{
+    std::cout << 
+    (_core->checkReactor()->isStable() ? 
+    "Everything is in order." : "Critical failure imminent.")
+    << std::endl;  
+}

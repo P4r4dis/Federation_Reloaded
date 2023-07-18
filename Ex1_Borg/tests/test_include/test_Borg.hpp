@@ -10,6 +10,7 @@ namespace                       Borg
         public:
             Ship(void);
             void                setupCore(WarpSystem::Core *core);
+            void                checkCore(void);
         private:
             int                 _side;
             short               _maxWarp;
