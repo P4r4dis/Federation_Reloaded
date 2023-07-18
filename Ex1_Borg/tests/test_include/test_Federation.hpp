@@ -10,6 +10,7 @@ namespace Federation
     {
         class Ship;
         class Captain;
+        class Ensign;
     }
     class Ship;
 }
@@ -52,6 +53,14 @@ namespace                           Federation
                 std::string         _name;
                 int                 _age;
 
+        };
+
+        class                       Ensign
+        {
+            public:
+                explicit Ensign(std::string name);
+            private:
+                const std::string         _name;
         };
     }
 

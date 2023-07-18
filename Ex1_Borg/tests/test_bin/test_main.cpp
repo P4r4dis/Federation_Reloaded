@@ -180,6 +180,13 @@ Test(Federation_Starfleet_Ship, test_Ship_promote, .init = redirect_all_stdout)
     );
 }
 
+Test(Federation_Starfleet_Ensign, test_Ensign_constructor, .init = redirect_all_stdout)
+{
+    Federation::Starfleet::Ensign   Ensign("Pavel Chekov");
+
+    cr_assert_stdout_eq_str("Ensign Pavel Chekov, awaiting orders.\n");
+}
+
 // Test(Main, test_main, .init = redirect_all_stdout)
 // {
 // 	Federation::Starfleet::Ship 	UssKreog(289, 132, "Kreog", 6);
