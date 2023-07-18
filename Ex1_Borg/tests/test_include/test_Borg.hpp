@@ -1,16 +1,19 @@
-#ifndef                     __BORG__
-    #define                 __BORG__
+#ifndef                         __BORG__
+    #define                     __BORG__
 
 #include <iostream>
-namespace                   Borg
+#include "test_WarpSystem.hpp"
+namespace                       Borg
 {
-    class                   Ship
+    class                       Ship
     {
         public:
             Ship(void);
+            void                setupCore(WarpSystem::Core *core);
         private:
-            int             _side;
-            short           _maxWarp;
+            int                 _side;
+            short               _maxWarp;
+            WarpSystem::Core    *_core;
     };
 }
-#endif //                   __BORG__
+#endif //                       __BORG__

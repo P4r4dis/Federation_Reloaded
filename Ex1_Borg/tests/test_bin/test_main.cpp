@@ -124,6 +124,21 @@ Test(Borg_Ship, test_Ship_constructor, .init = redirect_all_stdout)
     );
 }
 
+Test(Borg_Ship, test_Borg_Ship_constructor, .init = redirect_all_stdout)
+{
+    Borg::Ship	                Cube;
+    WarpSystem::QuantumReactor  QR;
+    WarpSystem::Core 			core(&QR);
+    Cube.setupCore(&core);
+
+    cr_assert_stdout_eq_str(
+    "We are the Borgs."
+    " Lower your shields and surrender yourselves unconditionally.\n"
+    "Your biological characteristics and technologies will be assimilated.\n"
+    "Resistance is futile.\n"
+    );
+}
+
 // Test(Main, test_main, .init = redirect_all_stdout)
 // {
 // 	Federation::Starfleet::Ship 	UssKreog(289, 132, "Kreog", 6);
