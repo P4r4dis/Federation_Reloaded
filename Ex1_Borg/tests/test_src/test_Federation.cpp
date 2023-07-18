@@ -87,3 +87,8 @@ int             Federation::Starfleet::Captain::getAge(void)
 {
     return _age;
 }
+
+void            Federation::Starfleet::Captain::setAge(int age)
+{
+    _age = age;
+}

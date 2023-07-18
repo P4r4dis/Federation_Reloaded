@@ -36,6 +36,7 @@ namespace                           Federation
 
                 std::string         getName(void);
                 int                 getAge(void);
+                void                setAge(int age);
             private:
                 std::string         _name;
                 int                 _age;

@@ -161,6 +161,8 @@ Test(Federation_Starfleet_Captain, test_Captain)//, .init = redirect_all_stdout)
 
     cr_assert(James.getName() == "James T. Kirk");
     cr_assert(James.getAge() == 0);
+    James.setAge(21);
+    cr_assert(James.getAge() == 21);
 }
 
 // Test(Main, test_main, .init = redirect_all_stdout)
