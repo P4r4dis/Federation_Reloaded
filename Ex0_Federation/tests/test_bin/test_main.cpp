@@ -113,5 +113,33 @@ Test(Ship, test_checkCore, .init = redirect_all_stdout)
 
 Test(Main, test_main, .init = redirect_all_stdout)
 {
-	cr_assert(1 == 1);
+	Federation::Starfleet::Ship 	UssKreog(289, 132, "Kreog", 6);
+	Federation::Ship 				Independent(150, 230, "Greok");
+	WarpSystem::QuantumReactor 		QR;
+	WarpSystem::QuantumReactor 		QR2;
+	WarpSystem::Core 				core(&QR);
+	WarpSystem::Core 				core2(&QR2);
+
+	UssKreog.setupCore(&core);
+	UssKreog.checkCore();
+	Independent.setupCore(&core2);
+	Independent.checkCore();
+	QR.setStability(false);
+	QR2.setStability(false);
+	UssKreog.checkCore();
+	Independent.checkCore();
+
+    cr_assert_stdout_eq_str(
+    "The ship USS Kreog has been finished.\n"
+    "It is 289 m in length and 132 m in width.\n"
+    "It can go to Warp 6!\n"
+    "The independent ship Greok just finished its construction.\n"
+    "It is 150 m in length and 230 m in width.\n"
+    "USS Kreog: The core is set.\n"
+    "USS Kreog: The core is stable at the time.\n"
+    "Greok: The core is set.\n"
+    "Greok: The core is stable at the time.\n"
+    "USS Kreog: The core is unstable at the time.\n"
+    "Greok: The core is unstable at the time.\n"
+    );
 }
