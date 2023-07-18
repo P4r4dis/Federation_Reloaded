@@ -16,6 +16,14 @@ Federation::Starfleet::Ship::Ship(
                 << "It can go to Warp " << _maxWarp << "!" << std::endl;
 }
 
+Federation::Ship::Ship(int length, int width, std::string name)
+                :   _length(length), _width(width), _name(name)
+{
+    std::cout   << "The independent ship "
+                << _name << " just finished its construction."
+                << std::endl;
+}
+
 int             Federation::Starfleet::Ship::getLength(void) const
 {
     return _length;

@@ -22,10 +22,12 @@ Test(Federation, test_Federation_Starfleet_Ship_constructor, .init = redirect_al
     cr_assert(UssKreog.getName() == "Kreog");
     cr_assert(UssKreog.getMaxWarp() == 6);
 
+    Federation::Ship            Independent(150, 230, "Greok");
 	cr_assert_stdout_eq_str(
         "The ship USS Kreog has been finished.\n"
         "It is 289 m in length and 132 m in width.\n"
         "It can go to Warp 6!\n"
+        "The independent ship Greok just finished its construction.\n"
     );
 }
 
