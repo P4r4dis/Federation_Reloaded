@@ -21,7 +21,9 @@ Federation::Ship::Ship(int length, int width, std::string name)
 {
     std::cout   << "The independent ship "
                 << _name << " just finished its construction."
-                << std::endl;
+                << std::endl
+                << "It is " << _length << " m in length and "
+                << _width << " m in width." << std::endl;
 }
 
 int             Federation::Starfleet::Ship::getLength(void) const

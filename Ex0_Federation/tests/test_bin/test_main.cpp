@@ -28,6 +28,7 @@ Test(Federation, test_Federation_Starfleet_Ship_constructor, .init = redirect_al
         "It is 289 m in length and 132 m in width.\n"
         "It can go to Warp 6!\n"
         "The independent ship Greok just finished its construction.\n"
+        "It is 150 m in length and 230 m in width.\n"
     );
 }
 

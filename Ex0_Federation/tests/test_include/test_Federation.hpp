@@ -11,7 +11,6 @@ namespace                       Federation
         {
             public:
                 Ship(int length, int width, std::string name, short maxWarp);
-                Ship(int length, int width, std::string name);
 
                 int             getLength(void) const;
                 int             getWidth(void) const;
