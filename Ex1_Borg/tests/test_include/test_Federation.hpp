@@ -28,6 +28,19 @@ namespace                           Federation
                 short               _maxWarp;
                 WarpSystem::Core    *_core;
         };
+
+        class                       Captain
+        {
+            public:
+                Captain(std::string name);
+
+                std::string         getName(void);
+                int                 getAge(void);
+            private:
+                std::string         _name;
+                int                 _age;
+
+        };
     }
 
     class                           Ship

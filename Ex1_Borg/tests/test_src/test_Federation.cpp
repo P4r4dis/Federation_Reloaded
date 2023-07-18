@@ -73,3 +73,17 @@ void            Federation::Ship::checkCore(void)
                 << (_core->checkReactor()->isStable() ? "stable" : "unstable")
                 << " at the time." << std::endl;
 }
+
+Federation::Starfleet::Captain::Captain(std::string name) : _name(name), 
+                                                            _age(0)
+{}
+
+std::string     Federation::Starfleet::Captain::getName(void)
+{
+    return _name;
+}
+
+int             Federation::Starfleet::Captain::getAge(void)
+{
+    return _age;
+}

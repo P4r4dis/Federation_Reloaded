@@ -155,6 +155,14 @@ Test(Borg_Ship, test_Borg_Ship_checkCore, .init = redirect_all_stdout)
     );
 }
 
+Test(Federation_Starfleet_Captain, test_Captain)//, .init = redirect_all_stdout)
+{
+    Federation::Starfleet::Captain  James("James T. Kirk");
+
+    cr_assert(James.getName() == "James T. Kirk");
+    cr_assert(James.getAge() == 0);
+}
+
 // Test(Main, test_main, .init = redirect_all_stdout)
 // {
 // 	Federation::Starfleet::Ship 	UssKreog(289, 132, "Kreog", 6);
