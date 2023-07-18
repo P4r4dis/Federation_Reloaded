@@ -43,6 +43,18 @@ Test(QuantumReactor, test_WarpSystem_QuantumReactor_constructor)//, .init = redi
     cr_assert(QR.isStable() == true);
 }
 
+Test(Core, test_WarpSystem_Core_constructor)//, .init = redirect_all_stdout)
+{
+    WarpSystem::QuantumReactor  QR;
+
+    WarpSystem::Core            core(&QR);
+    cr_assert(core.checkReactor()->isStable() == true);
+    core.checkReactor()->setStability(false);
+    cr_assert(core.checkReactor()->isStable() == false);
+    core.checkReactor()->setStability(true);
+    cr_assert(core.checkReactor()->isStable() == true);
+}
+
 Test(Main, test_main)//, .init = redirect_all_stdout)
 {
 	cr_assert(1 == 1);

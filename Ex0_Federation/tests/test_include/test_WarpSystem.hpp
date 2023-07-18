@@ -13,5 +13,15 @@ namespace                   WarpSystem
         private:
             bool            _stability;
     };
+
+    class                   Core
+    {
+        public:
+            Core(QuantumReactor *QR);
+
+            QuantumReactor  *checkReactor(void);
+        private:
+            QuantumReactor  *_QR;
+    };
 }
 #endif //                   __WARPSYSTEM__
