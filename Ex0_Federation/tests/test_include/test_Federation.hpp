@@ -1,41 +1,50 @@
-#ifndef                         __FEDERATION__
-    #define                     __FEDERATION__
+#ifndef                             __FEDERATION__
+    #define                         __FEDERATION__
 
 #include <iostream>
 
-namespace                       Federation
+#include "test_WarpSystem.hpp"
+
+namespace                           Federation
 {
-    namespace                   Starfleet
+    namespace                       Starfleet
     {
-        class                   Ship
+        class                       Ship
         {
             public:
                 Ship(int length, int width, std::string name, short maxWarp);
 
-                int             getLength(void) const;
-                int             getWidth(void) const;
-                std::string     getName(void) const;
-                short           getMaxWarp(void) const;
+                int                 getLength(void) const;
+                int                 getWidth(void) const;
+                std::string         getName(void) const;
+                short               getMaxWarp(void) const;
+
+                void                setupCore(WarpSystem::Core *core);
             private:
-                int             _length;
-                int             _width;
-                std::string     _name;
-                short           _maxWarp;
+                int                 _length;
+                int                 _width;
+                std::string         _name;
+                short               _maxWarp;
+                WarpSystem::Core    *_core;
         };
     }
 
-    class                       Ship
+    class                           Ship
     {
         public:
             Ship(int length, int width, std::string name);
 
-            int                 getLength(void) const;
-            int                 getWidth(void) const;
-            std::string         getName(void) const;
+            int                     getLength(void) const;
+            int                     getWidth(void) const;
+            std::string             getName(void) const;
+
+            void                    setupCore(WarpSystem::Core *core);
+
         private:
-            int                 _length;
-            int                 _width;
-            std::string         _name;
+            int                     _length;
+            int                     _width;
+            std::string             _name;
+            WarpSystem::Core        *_core;
     };
 }
-#endif //                       __FEDERATION__
+#endif //                           __FEDERATION__

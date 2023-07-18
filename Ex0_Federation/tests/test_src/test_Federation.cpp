@@ -45,3 +45,15 @@ short           Federation::Starfleet::Ship::getMaxWarp(void) const
 {
     return _maxWarp;
 }
+
+void            Federation::Starfleet::Ship::setupCore(WarpSystem::Core *core)
+{
+    _core = core;
+    std::cout   << "USS " << _name << ": The core is set." << std::endl;
+}
+
+void            Federation::Ship::setupCore(WarpSystem::Core *core)
+{
+    _core = core;
+    std::cout   << _name << ": The core is set." << std::endl;
+}
