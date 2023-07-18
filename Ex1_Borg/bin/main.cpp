@@ -1,5 +1,6 @@
 #include "../include/Federation.hpp"
 #include "../include/WarpSystem.hpp"
+#include "../include/Borg.hpp"
 
 int	main()
 {

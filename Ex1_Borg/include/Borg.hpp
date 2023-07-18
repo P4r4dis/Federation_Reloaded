@@ -1,0 +1,20 @@
+#ifndef                         __BORG__
+    #define                     __BORG__
+
+#include <iostream>
+#include "WarpSystem.hpp"
+namespace                       Borg
+{
+    class                       Ship
+    {
+        public:
+            Ship(void);
+            void                setupCore(WarpSystem::Core *core);
+            void                checkCore(void);
+        private:
+            int                 _side;
+            short               _maxWarp;
+            WarpSystem::Core    *_core;
+    };
+}
+#endif //                       __BORG__

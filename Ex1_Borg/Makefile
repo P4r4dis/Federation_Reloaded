@@ -5,7 +5,7 @@ SRC_PATH	=	./src
 TST_PATH	=	./tests
 INC_PATH	=	./include
 
-NAME		=	Ex0
+NAME		=	Ex1
 TEST_NAME 	= 	test_$(NAME)
 ##############################################
 
