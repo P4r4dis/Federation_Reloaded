@@ -22,7 +22,17 @@ EX1_SRC_TEST			=	$(EX1_TST_PATH)/$(NAME_EX1)_test.cpp
 TEST_NAME_EX1 			= 	test_$(NAME_EX1)
 
 #################################################
+EX2_PATH 				= 	./Ex2_Move
+EX2_SRC_PATH			=	./Ex2_Move/src
+EX2_TST_PATH			=	./Ex2_Move/tests
+EX2_INC_PATH			=	./Ex2_Move/include
+NAME_EX2				=	Ex2
+# EX0_SRC					=	$(EX0_SRC_PATH)/.cpp
 
+EX2_SRC_TEST			=	$(EX2_TST_PATH)/$(NAME_EX2)_test.cpp
+TEST_NAME_EX2 			= 	test_$(NAME_EX2)
+
+#################################################
 OBJS					=	$(SRCS:.cpp=.o)
 CLEAN					=	clean
 FCLEAN					=	fclean
@@ -32,6 +42,8 @@ clean					:
 							$(RM) $(OBJS)
 							@$(MAKE) $(CLEAN) -C $(EX0_TST_PATH)
 							@$(MAKE) $(CLEAN) -C $(EX1_TST_PATH)
+							@$(MAKE) $(CLEAN) -C $(EX2_TST_PATH)
+
 
 fclean					:	clean
 							$(RM) $(NAME) $(TEST_NAME)
@@ -39,6 +51,8 @@ fclean					:	clean
 							@$(MAKE) $(FCLEAN) -C $(EX0_PATH)
 							@$(MAKE) $(FCLEAN) -C $(EX1_TST_PATH)
 							@$(MAKE) $(FCLEAN) -C $(EX1_PATH)
+							@$(MAKE) $(FCLEAN) -C $(EX2_TST_PATH)
+							@$(MAKE) $(FCLEAN) -C $(EX2_PATH)
 
 re						: 	fclean all
 
@@ -58,10 +72,21 @@ tests_run_Ex1			:	fclean
 							@$(MAKE) -C $(EX1_TST_PATH)
 							$(EX1_TST_PATH)/$(TEST_NAME_EX1)
 
+Ex2 					: 	fclean
+							@$(MAKE) -C $(EX2_PATH)
+							$(EX2_PATH)/$(NAME_EX2)
+
+tests_run_Ex2			:	fclean
+							@$(MAKE) -C $(EX2_TST_PATH)
+							$(EX2_TST_PATH)/$(TEST_NAME_EX2)
+
 tests_run				:	fclean
 							@$(MAKE) tests_run_EX0
+							@$(MAKE) tests_run_EX1
+							@$(MAKE) tests_run_EX2
 
 .PHONY					: 	all clean fclean re \
 							tests_run \
 							Ex0 tests_run_Ex0 \
-							Ex1 tests_run_Ex1
+							Ex1 tests_run_Ex1 \
+							Ex2 tests_run_Ex2
