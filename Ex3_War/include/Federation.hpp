@@ -4,8 +4,13 @@
 #include <iostream>
 
 #include "WarpSystem.hpp"
+#include "Borg.hpp"
 #include "Destination.hpp"
 
+namespace Borg
+{
+    class Ship;
+}
 namespace Federation
 {
     namespace Starfleet
@@ -23,14 +28,19 @@ namespace                                       Federation
         class                                   Ship
         {
             public:
-                Ship(int length, int width, std::string name, short maxWarp);
-
+                Ship(int length, int width, std::string name, short maxWarp, int torpedo = 0);
+                Ship();
                 int                             getLength(void) const;
                 int                             getWidth(void) const;
                 std::string                     getName(void) const;
                 short                           getMaxWarp(void) const;
                 Destination                     getHome(void) const;
                 Destination                     getLocation(void) const;
+                int                             getShield(void) const;
+                int                             getTorpedo(void) const;
+
+                void                            setShield(int shield);
+                void                            setTorpedo(int torpedo);
 
 
                 void                            setupCore(WarpSystem::Core *core);
@@ -41,6 +51,9 @@ namespace                                       Federation
                 bool                            move(Destination d);
                 bool                            move(void);
 
+                void                            fire(Borg::Ship *target);
+                void                            fire(int torpedoes, Borg::Ship *target);
+
             private:
                 int                             _length;
                 int                             _width;
@@ -50,6 +63,8 @@ namespace                                       Federation
                 Federation::Starfleet::Captain  *_captain;
                 Destination                     _location;
                 Destination                     _home;
+                int                             _shield;
+                int                             _photonTorpedo;
                 
                 
         };
@@ -85,16 +100,19 @@ namespace                                       Federation
             int                                 getLength(void) const;
             int                                 getWidth(void) const;
             std::string                         getName(void) const;
+            int                                 getShield(void) const;
+            void                                setShield(int shield);
 
             void                                setupCore(WarpSystem::Core *core);
             void                                checkCore(void);
-
+            WarpSystem::Core                    *getCore(void) const;
             Destination                         getHome(void) const;
             Destination                         getLocation(void) const;
             bool                                move(int warp, Destination d);
             bool                                move(int warp);
             bool                                move(Destination d);
             bool                                move();
+
 
         private:
             int                                 _length;
@@ -104,6 +122,7 @@ namespace                                       Federation
             WarpSystem::Core                    *_core;
             Destination                         _home;
             Destination                         _location;
+            int                                 _shield;
     };
 }
 #endif //                                       __FEDERATION__

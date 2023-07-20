@@ -187,36 +187,7 @@ Test(Federation_Starfleet_Ensign, test_Ensign_constructor, .init = redirect_all_
     cr_assert_stdout_eq_str("Ensign Pavel Chekov, awaiting orders.\n");
 }
 
-// Test(Main, test_main, .init = redirect_all_stdout)
-// {
-// 	Federation::Starfleet::Ship 		UssKreog(289, 132, "Kreog", 6);
-	// Federation::Starfleet::Captain 		James("James T. Kirk");
-// 	Federation::Starfleet::Ensign	 	Ensign("Pavel Chekov");
-// 	WarpSystem::QuantumReactor 			QR;
-// 	WarpSystem::QuantumReactor 			QR2;
-// 	WarpSystem::Core 					core(&QR);
-// 	WarpSystem::Core 					core2(&QR2);
-// 	UssKreog.setupCore(&core);
-// 	UssKreog.checkCore();
-// 	UssKreog.promote(&James);
-// 	Borg::Ship	 						Cube;
-// 	Cube.setupCore(&core2);
-// 	Cube.checkCore();
 
-//     cr_assert_stdout_eq_str(
-//     "The ship USS Kreog has been finished.\n"
-//     "It is 289 m in length and 132 m in width.\n"
-//     "It can go to Warp 6!\n"
-//     "Ensign Pavel Chekov, awaiting orders.\n"
-//     "USS Kreog: The core is set.\n"
-//     "USS Kreog: The core is stable at the time.\n"
-//     "James T. Kirk: I'm glad to be the captain of the USS Kreog.\n"
-//     "We are the Borgs. Lower your shields and surrender yourselves unconditionally.\n"
-//     "Your biological characteristics and technologies will be assimilated.\n"
-//     "Resistance is futile.\n"
-//     "Everything is in order.\n"
-//     );
-// }
 
 Test(Federation, test_Federation_Starfleet_Ship_move, .init = redirect_all_stdout)
 {
@@ -507,4 +478,96 @@ Test(Borg, test_Borg_Ship_repair, .init = redirect_all_stdout)
     "Kreog: Firing on target. 1 torpedoes remaining.\n"
     "Energy cells depleted, shield weakening.\n"
     );
+}
+
+Test(Main, test_War_main)//, .init = redirect_all_stdout)
+{
+	Federation::Starfleet::Ship 		UssKreog(289, 132, "Kreog", 6, 3);
+    Federation::Ship 			        Independent(150, 230, "Greok");
+
+	Federation::Starfleet::Captain 		James("James T. Kirk");
+	Federation::Starfleet::Ensign	 	Ensign("Pavel Chekov");
+	WarpSystem::QuantumReactor 			QR;
+	WarpSystem::QuantumReactor 			QR2;
+	WarpSystem::Core 					core(&QR);
+	WarpSystem::Core 					core2(&QR2);
+	UssKreog.setupCore(&core);
+	UssKreog.checkCore();
+	UssKreog.promote(&James);
+	Borg::Ship	 						Cube;
+	Cube.setupCore(&core2);
+	Cube.checkCore();
+    cr_assert(UssKreog.getHome() == EARTH);
+    cr_assert(UssKreog.move(1, UNICOMPLEX) == true);
+    cr_assert(UssKreog.getLocation() == UNICOMPLEX);
+
+    cr_assert(UssKreog.getHome() == EARTH);
+    cr_assert(UssKreog.move(1) == true);
+    cr_assert(UssKreog.getLocation() == EARTH);
+
+    cr_assert(UssKreog.getHome() == EARTH);
+    cr_assert(UssKreog.move(UNICOMPLEX) == true);
+    cr_assert(UssKreog.getLocation() == UNICOMPLEX);
+
+    cr_assert(UssKreog.getHome() == EARTH);
+    cr_assert(UssKreog.move() == true);
+    cr_assert(UssKreog.getLocation() == EARTH);
+
+    cr_assert(Cube.getHome() == UNICOMPLEX);
+    cr_assert(Cube.move(1, VULCAN) == true);
+    cr_assert(Cube.getLocation() == VULCAN);
+
+    cr_assert(Cube.getHome() == UNICOMPLEX);
+    cr_assert(Cube.move(1) == true);
+    cr_assert(Cube.getLocation() == UNICOMPLEX);
+
+    cr_assert(Cube.getHome() == UNICOMPLEX);
+    cr_assert(Cube.move(VULCAN) == true);
+    cr_assert(Cube.getLocation() == VULCAN);
+
+    cr_assert(Cube.getHome() == UNICOMPLEX);
+    cr_assert(Cube.move() == true);
+    cr_assert(Cube.getLocation() == UNICOMPLEX);
+
+     cr_assert(Cube.getShield() == 100);
+    UssKreog.fire(&Cube);
+    cr_assert(Cube.getShield() == 50);
+    cr_assert(UssKreog.getTorpedo() == 2);
+    UssKreog.fire(&Cube);
+    cr_assert(Cube.getShield() == 0);
+    cr_assert(UssKreog.getTorpedo() == 1);
+    UssKreog.fire(&Cube);
+    cr_assert(Cube.getShield() == 0);
+    cr_assert(UssKreog.getTorpedo() == 0);
+    UssKreog.fire(&Cube);
+
+    cr_assert(UssKreog.getShield() == 100);
+    Cube.fire(&UssKreog);
+    cr_assert(UssKreog.getShield() == 80);
+
+    cr_assert(Independent.getShield() == 100);
+    Cube.fire(&Independent);
+    cr_assert(Independent.getShield() == 80);
+
+    cr_assert(Cube.getShield() == 0);
+    UssKreog.fire(&Cube);
+    cr_assert(Cube.getShield() == 0);
+    Cube.repair();
+    cr_assert(Cube.getShield() == 100);
+    UssKreog.fire(&Cube);
+    Cube.repair();
+    cr_assert(Cube.getShield() == 100);
+    // cr_assert_stdout_eq_str(
+    // "The ship USS Kreog has been finished.\n"
+    // "It is 289 m in length and 132 m in width.\n"
+    // "It can go to Warp 6!\n"
+    // "Ensign Pavel Chekov, awaiting orders.\n"
+    // "USS Kreog: The core is set.\n"
+    // "USS Kreog: The core is stable at the time.\n"
+    // "James T. Kirk: I'm glad to be the captain of the USS Kreog.\n"
+    // "We are the Borgs. Lower your shields and surrender yourselves unconditionally.\n"
+    // "Your biological characteristics and technologies will be assimilated.\n"
+    // "Resistance is futile.\n"
+    // "Everything is in order.\n"
+    // );
 }

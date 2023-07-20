@@ -4,8 +4,8 @@
 
 int	main()
 {
-	Federation::Starfleet::Ship 		UssKreog(289, 132, "Kreog", 6);
-	Federation::Ship			 		independant(150, 230, "Greok");
+	Federation::Starfleet::Ship 		UssKreog(289, 132, "Kreog", 6, 3);
+	Federation::Ship			 		Independant(150, 230, "Greok");
 
 	Federation::Starfleet::Captain 		James("James T. Kirk");
 	Federation::Starfleet::Ensign	 	Ensign("Pavel Chekov");
@@ -29,16 +29,30 @@ int	main()
     UssKreog.move(UNICOMPLEX);
     UssKreog.move();
 
-	independant.setupCore(&core3);
-	independant.checkCore();
-    independant.move(1, UNICOMPLEX);
-    independant.move(1);
-    independant.move(EARTH);
-    independant.move();
+	Independant.setupCore(&core3);
+	Independant.checkCore();
+    Independant.move(1, UNICOMPLEX);
+    Independant.move(1);
+    Independant.move(EARTH);
+    Independant.move();
 	
 	Cube.move(1, VULCAN);
     Cube.move(1);
     Cube.move(UNICOMPLEX);
     Cube.move();
+
+    UssKreog.fire(&Cube);
+    UssKreog.fire(&Cube);
+    UssKreog.fire(&Cube);
+    UssKreog.fire(&Cube);
+
+    Cube.fire(&UssKreog);
+
+    Cube.fire(&Independant);
+
+    UssKreog.fire(&Cube);
+    Cube.repair();
+    UssKreog.fire(&Cube);
+    Cube.repair();
 	return 0;
 }
