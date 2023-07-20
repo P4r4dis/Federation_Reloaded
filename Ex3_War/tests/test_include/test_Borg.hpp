@@ -40,6 +40,7 @@ namespace                       Borg
 
             void                fire(Federation::Starfleet::Ship *target);
             void                fire(Federation::Ship *target);
+            void                repair(void);
         private:
             int                 _side;
             short               _maxWarp;

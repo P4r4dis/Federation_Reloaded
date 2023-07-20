@@ -112,3 +112,16 @@ void            Borg::Ship::fire(Federation::Ship *target)
     if (target->getShield() < 0)
         target->setShield(0);
 }
+
+void            Borg::Ship::repair(void)
+{
+    if (_repair > 0)
+    {
+        _repair -= 1;
+        _shield = 100;
+        std::cout   << "Begin shield re-initialisation... "
+                    << "Done. Awaiting further instructions." << std::endl;
+    }
+    else
+        std::cout   << "Energy cells depleted, shield weakening." << std::endl;
+}

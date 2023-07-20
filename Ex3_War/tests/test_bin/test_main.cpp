@@ -478,3 +478,33 @@ Test(Borg, test_Borg_Ship_fire, .init = redirect_all_stdout)
     "Firing on target with 30 GW frequency.\n"
     );
 }
+
+Test(Borg, test_Borg_Ship_repair, .init = redirect_all_stdout)
+{    
+    Borg::Ship	                Cube(30, 1);
+    Federation::Starfleet::Ship UssKreog(289, 132, "Kreog", 6, 3);
+
+    cr_assert(Cube.getShield() == 100);
+    UssKreog.fire(&Cube);
+    cr_assert(Cube.getShield() == 50);
+    Cube.repair();
+    cr_assert(Cube.getShield() == 100);
+    UssKreog.fire(&Cube);
+    Cube.repair();
+    cr_assert(Cube.getShield() == 50);
+
+    cr_assert_stdout_eq_str(
+    "We are the Borgs."
+    " Lower your shields and surrender yourselves unconditionally.\n"
+    "Your biological characteristics and technologies will be assimilated.\n"
+    "Resistance is futile.\n"
+    "The ship USS Kreog has been finished.\n"
+    "It is 289 m in length and 132 m in width.\n"
+    "It can go to Warp 6!\n"
+    "Weapons are set: 3 torpedoes ready\n"
+    "Kreog: Firing on target. 2 torpedoes remaining.\n"
+    "Begin shield re-initialisation... Done. Awaiting further instructions.\n"
+    "Kreog: Firing on target. 1 torpedoes remaining.\n"
+    "Energy cells depleted, shield weakening.\n"
+    );
+}
