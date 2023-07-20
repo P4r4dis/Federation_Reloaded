@@ -326,10 +326,10 @@ Test(Federation, test_Federation_Starfleet_Ship_constructorV2, .init = redirect_
     cr_assert(UssKreog.getMaxWarp() == 6);
     cr_assert(UssKreog.getHome() == EARTH);
     cr_assert(UssKreog.getLocation() == EARTH);
-    cr_assert(UssKreog.getSheild() == 100);
+    cr_assert(UssKreog.getShield() == 100);
     cr_assert(UssKreog.getTorpedo() == 0);
-    UssKreog.setSheild(150);
-    cr_assert(UssKreog.getSheild() == 150);
+    UssKreog.setShield(150);
+    cr_assert(UssKreog.getShield() == 150);
     UssKreog.setTorpedo(10);
     cr_assert(UssKreog.getTorpedo() == 10);
 
@@ -361,15 +361,15 @@ Test(Federation, test_Federation_Starfleet_Ship_fire, .init = redirect_all_stdou
     Borg::Ship borg;
 
 
-    cr_assert(borg.getSheild() == 100);
+    cr_assert(borg.getShield() == 100);
     UssKreog.fire(&borg);
-    cr_assert(borg.getSheild() == 50);
+    cr_assert(borg.getShield() == 50);
     cr_assert(UssKreog.getTorpedo() == 2);
     UssKreog.fire(&borg);
-    cr_assert(borg.getSheild() == 0);
+    cr_assert(borg.getShield() == 0);
     cr_assert(UssKreog.getTorpedo() == 1);
     UssKreog.fire(&borg);
-    cr_assert(borg.getSheild() == 0);
+    cr_assert(borg.getShield() == 0);
     cr_assert(UssKreog.getTorpedo() == 0);
     UssKreog.fire(&borg);
 
@@ -378,7 +378,7 @@ Test(Federation, test_Federation_Starfleet_Ship_fire, .init = redirect_all_stdou
     UssKreog2.promote(&James2);
 
     UssKreog2.fire(3, &borg);
-    cr_assert(borg.getSheild() == 0);
+    cr_assert(borg.getShield() == 0);
     cr_assert(UssKreog.getTorpedo() == 0);
     UssKreog2.fire(3, &borg);
 
@@ -422,5 +422,29 @@ Test(Ship, test_Federation_Ship_getCore, .init = redirect_all_stdout)
     "The independent ship Greok just finished its construction.\n"
     "It is 150 m in length and 230 m in width.\n"
     "Greok: The core is set.\n"
+    );
+}
+
+Test(Borg, test_Borg_Ship_customCtor, .init = redirect_all_stdout)
+{    
+    Borg::Ship	                Cube(30, 10);
+
+    cr_assert(Cube.getShield() == 100);
+    Cube.setShield(150);
+    cr_assert(Cube.getShield() == 150);
+
+    cr_assert(Cube.getWeaponFrequency() == 30);
+    Cube.setWeaponFrequency(50);
+    cr_assert(Cube.getWeaponFrequency() == 50);
+
+    cr_assert(Cube.getRepair() == 10);
+    Cube.setRepair(20);
+    cr_assert(Cube.getRepair() == 20);
+
+    cr_assert_stdout_eq_str(
+    "We are the Borgs."
+    " Lower your shields and surrender yourselves unconditionally.\n"
+    "Your biological characteristics and technologies will be assimilated.\n"
+    "Resistance is futile.\n"
     );
 }

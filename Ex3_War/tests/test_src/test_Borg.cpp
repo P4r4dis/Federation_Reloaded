@@ -1,15 +1,17 @@
 #include "../test_include/test_Borg.hpp"
 
-Borg::Ship::Ship(void) :    _side(300), _maxWarp(9), _core(nullptr), 
-                            _home(UNICOMPLEX), _location(_home), _sheild(100)
-
+Borg::Ship::Ship(int weaponFrequency, short repair) :   _side(300), _maxWarp(9), _core(nullptr),
+                                                        _home(UNICOMPLEX), _location(_home),
+                                                        _shield(100), 
+                                                        _weaponFrequency(weaponFrequency), 
+                                                        _repair(repair)
 {
     std::cout   << "We are the Borgs."
                 << " Lower your shields and surrender yourselves unconditionally."
                 << std::endl
                 << "Your biological characteristics and technologies will be assimilated."
                 << std::endl
-                << "Resistance is futile." << std::endl;
+                << "Resistance is futile." << std::endl;   
 }
 
 void    Borg::Ship::setupCore(WarpSystem::Core *core)
@@ -63,12 +65,32 @@ Destination     Borg::Ship::getLocation(void) const
     return _location;
 }
 
-int             Borg::Ship::getSheild(void) const
+int             Borg::Ship::getShield(void) const
 {
-    return _sheild;
+    return _shield;
 }
 
-void            Borg::Ship::setSheild(int sheild)
+void            Borg::Ship::setShield(int sheild)
 {
-    _sheild = sheild;
+    _shield = sheild;
+}
+
+int             Borg::Ship::getWeaponFrequency()
+{
+    return _weaponFrequency;
+}
+
+void            Borg::Ship::setWeaponFrequency(int frequency)
+{
+    _weaponFrequency = frequency;
+}
+
+short           Borg::Ship::getRepair()
+{
+    return _repair;
+}
+
+void            Borg::Ship::setRepair(short repair)
+{
+    _repair = repair;
 }

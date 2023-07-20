@@ -9,7 +9,7 @@ Federation::Starfleet::Ship::Ship(
     :
     _length(length), _width(width), _name(name), _maxWarp(maxWarp),
     _core(nullptr), _captain(nullptr), _location(EARTH), _home(EARTH),
-    _sheild(100), _photonTorpedo(torpedo)
+    _shield(100), _photonTorpedo(torpedo)
 {
     std::cout   << "The ship USS " << _name << " has been finished." 
                 << std::endl
@@ -28,7 +28,7 @@ Federation::Starfleet::Ship::Ship() :   _length(289), _width(132),
                                             _name("Entreprise"), _maxWarp(6),
                                             _core(nullptr), _captain(nullptr), 
                                             _location(EARTH), _home(EARTH),
-                                            _sheild(100), _photonTorpedo(0)
+                                            _shield(100), _photonTorpedo(0)
 {
     std::cout   << "The ship USS " << _name << " has been finished." 
                 << std::endl
@@ -118,9 +118,9 @@ bool            Federation::Starfleet::Ship::move(void)
     return move(_maxWarp, _home);
 }
 
-int             Federation::Starfleet::Ship::getSheild(void) const
+int             Federation::Starfleet::Ship::getShield(void) const
 {
-    return _sheild;
+    return _shield;
 }
 
 int             Federation::Starfleet::Ship::getTorpedo(void) const
@@ -128,9 +128,9 @@ int             Federation::Starfleet::Ship::getTorpedo(void) const
     return _photonTorpedo;
 }
 
-void            Federation::Starfleet::Ship::setSheild(int sheild)
+void            Federation::Starfleet::Ship::setShield(int sheild)
 {
-    _sheild = sheild;
+    _shield = sheild;
 }
 
 void            Federation::Starfleet::Ship::setTorpedo(int torpedo)
@@ -145,9 +145,9 @@ void            Federation::Starfleet::Ship::fire(Borg::Ship *target)
         _photonTorpedo -= 1;
         std::cout   << _name << ": Firing on target. "
                     <<  _photonTorpedo << " torpedoes remaining." << std::endl;
-        target->setSheild(target->getSheild() - 50 * 1);
-        if (target->getSheild() < 0)
-            target->setSheild(0);
+        target->setShield(target->getShield() - 50 * 1);
+        if (target->getShield() < 0)
+            target->setShield(0);
         if (_photonTorpedo == 0)
         {
             std::cout   << _name << ": No more torpedo to fire, "
@@ -168,9 +168,9 @@ void            Federation::Starfleet::Ship::fire(int torpedoes, Borg::Ship *tar
         _photonTorpedo -= torpedoes;
         std::cout   << _name << ": Firing on target. "
                     <<  _photonTorpedo << " torpedoes remaining." << std::endl;
-        target->setSheild(target->getSheild() - 50 * torpedoes);
-        if (target->getSheild() < 0)
-            target->setSheild(0);
+        target->setShield(target->getShield() - 50 * torpedoes);
+        if (target->getShield() < 0)
+            target->setShield(0);
         if (_photonTorpedo == 0)
         {
             std::cout   << _name << ": No more torpedo to fire, "

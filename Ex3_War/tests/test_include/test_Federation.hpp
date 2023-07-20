@@ -32,10 +32,10 @@ namespace                                       Federation
                 short                           getMaxWarp(void) const;
                 Destination                     getHome(void) const;
                 Destination                     getLocation(void) const;
-                int                             getSheild(void) const;
+                int                             getShield(void) const;
                 int                             getTorpedo(void) const;
 
-                void                            setSheild(int sheild);
+                void                            setShield(int sheild);
                 void                            setTorpedo(int torpedo);
 
 
@@ -59,7 +59,7 @@ namespace                                       Federation
                 Federation::Starfleet::Captain  *_captain;
                 Destination                     _location;
                 Destination                     _home;
-                int                             _sheild;
+                int                             _shield;
                 int                             _photonTorpedo;
                 
                 
