@@ -2,6 +2,7 @@
     #define                         __ADMIRAL__
 
 #include <iostream>
+#include "test_Federation.hpp"
 
 namespace                           Federation
 {
@@ -17,12 +18,17 @@ namespace                           Federation
     {
         class                       Admiral
         {
+            private:
+                std::string         _name;
             public:
                 Admiral(std::string name);
 
                 std::string         getName(void) const;
-            private:
-                std::string         _name;
+
+                bool                (Federation::Starfleet::Ship::*movePtr) (Destination d);
+                bool                move(Federation::Starfleet::Ship *ship, Destination d);
+
+
         };
     }
 }

@@ -19,7 +19,7 @@ Federation::Starfleet::Ship::Ship(
                 << "It can go to Warp " << _maxWarp << "!" << std::endl;
     if (_photonTorpedo > 0)
     {
-        std::cout   << "Weapons are set: " << _photonTorpedo << " torpedoes ready"
+        std::cout   << "Weapons are set: " << _photonTorpedo << " torpedoes ready."
                     << std::endl;
     }
 }

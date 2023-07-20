@@ -317,7 +317,7 @@ Test(Federation, test_Federation_Starfleet_Ship_constructorV2, .init = redirect_
         "The ship USS Kreog has been finished.\n"
         "It is 289 m in length and 132 m in width.\n"
         "It can go to Warp 6!\n"
-        "Weapons are set: 10 torpedoes ready\n"
+        "Weapons are set: 10 torpedoes ready.\n"
         "The ship USS Entreprise has been finished.\n"
         "It is 289 m in length and 132 m in width.\n"
         "It can go to Warp 6!\n"
@@ -358,7 +358,7 @@ Test(Federation, test_Federation_Starfleet_Ship_fire, .init = redirect_all_stdou
         "The ship USS Kreog has been finished.\n"
         "It is 289 m in length and 132 m in width.\n"
         "It can go to Warp 6!\n"
-        "Weapons are set: 3 torpedoes ready\n"
+        "Weapons are set: 3 torpedoes ready.\n"
         "James T. Kirk: I'm glad to be the captain of the USS Kreog.\n"
         "We are the Borgs."
         " Lower your shields and surrender yourselves unconditionally.\n"
@@ -372,7 +372,7 @@ Test(Federation, test_Federation_Starfleet_Ship_fire, .init = redirect_all_stdou
         "The ship USS Kreog has been finished.\n"
         "It is 289 m in length and 132 m in width.\n"
         "It can go to Warp 6!\n"
-        "Weapons are set: 3 torpedoes ready\n"
+        "Weapons are set: 3 torpedoes ready.\n"
         "James T. Kirk: I'm glad to be the captain of the USS Kreog.\n"
         "Kreog: Firing on target. 0 torpedoes remaining.\n"
         "Kreog: No more torpedo to fire, James T. Kirk!\n"
@@ -443,7 +443,7 @@ Test(Borg, test_Borg_Ship_fire, .init = redirect_all_stdout)
     "The ship USS Kreog has been finished.\n"
     "It is 289 m in length and 132 m in width.\n"
     "It can go to Warp 6!\n"
-    "Weapons are set: 3 torpedoes ready\n"
+    "Weapons are set: 3 torpedoes ready.\n"
     "The independent ship Greok just finished its construction.\n"
     "It is 150 m in length and 230 m in width.\n"
     "Firing on target with 30 GW frequency.\n"
@@ -473,7 +473,7 @@ Test(Borg, test_Borg_Ship_repair, .init = redirect_all_stdout)
     "The ship USS Kreog has been finished.\n"
     "It is 289 m in length and 132 m in width.\n"
     "It can go to Warp 6!\n"
-    "Weapons are set: 3 torpedoes ready\n"
+    "Weapons are set: 3 torpedoes ready.\n"
     "Kreog: Firing on target. 2 torpedoes remaining.\n"
     "Begin shield re-initialisation... Done. Awaiting further instructions.\n"
     "Kreog: Firing on target. 1 torpedoes remaining.\n"
@@ -580,5 +580,29 @@ Test(Admiral, test_Federation_Starfleet_Admiral, .init = redirect_all_stdout)
     cr_assert(admiral.getName() == "Paradis");
     cr_assert_stdout_eq_str(
         "Admiral Paradis ready for action.\n"
+    );
+}
+
+Test(Admiral, test_Federation_Starfleet_Admiral_move, .init = redirect_all_stdout)
+{
+    Federation::Starfleet::Admiral     admiral("Paradis");
+    Federation::Starfleet::Ship         UssKreog(289, 132, "Kreog", 6, 3);
+	WarpSystem::QuantumReactor 			QR;
+	WarpSystem::Core 					core(&QR);
+    
+    cr_assert(admiral.getName() == "Paradis");
+
+    UssKreog.setupCore(&core);
+
+    cr_assert(admiral.move(&UssKreog, VULCAN)  == VULCAN);
+    cr_assert(UssKreog.getLocation() == VULCAN);
+
+    cr_assert_stdout_eq_str(
+        "Admiral Paradis ready for action.\n"
+        "The ship USS Kreog has been finished.\n"
+        "It is 289 m in length and 132 m in width.\n"
+        "It can go to Warp 6!\n"
+        "Weapons are set: 3 torpedoes ready.\n"
+        "USS Kreog: The core is set.\n"
     );
 }
