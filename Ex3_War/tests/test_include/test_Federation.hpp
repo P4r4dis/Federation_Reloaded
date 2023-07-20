@@ -7,6 +7,10 @@
 #include "test_Borg.hpp"
 #include "Destination.hpp"
 
+namespace Borg
+{
+    class Ship;
+}
 namespace Federation
 {
     namespace Starfleet
@@ -35,7 +39,7 @@ namespace                                       Federation
                 int                             getShield(void) const;
                 int                             getTorpedo(void) const;
 
-                void                            setShield(int sheild);
+                void                            setShield(int shield);
                 void                            setTorpedo(int torpedo);
 
 
@@ -96,6 +100,8 @@ namespace                                       Federation
             int                                 getLength(void) const;
             int                                 getWidth(void) const;
             std::string                         getName(void) const;
+            int                                 getShield(void) const;
+            void                                setShield(int shield);
 
             void                                setupCore(WarpSystem::Core *core);
             void                                checkCore(void);
@@ -116,6 +122,7 @@ namespace                                       Federation
             WarpSystem::Core                    *_core;
             Destination                         _home;
             Destination                         _location;
+            int                                 _shield;
     };
 }
 #endif //                                       __FEDERATION__

@@ -1,10 +1,21 @@
 #ifndef                         __BORG__
     #define                     __BORG__
 
+#include "test_Federation.hpp"
+
 #include <iostream>
 #include "test_WarpSystem.hpp"
 #include "Destination.hpp"
 
+namespace Federation
+{
+    namespace Starfleet
+    {
+        class Ship;
+    }
+
+    class Ship;
+}
 namespace                       Borg
 {
     class                       Ship
@@ -26,6 +37,9 @@ namespace                       Borg
             void                setWeaponFrequency(int frequency);
             short               getRepair();
             void                setRepair(short repair);
+
+            void                fire(Federation::Starfleet::Ship *target);
+            void                fire(Federation::Ship *target);
         private:
             int                 _side;
             short               _maxWarp;

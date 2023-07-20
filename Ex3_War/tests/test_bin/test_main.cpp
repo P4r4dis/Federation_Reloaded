@@ -448,3 +448,33 @@ Test(Borg, test_Borg_Ship_customCtor, .init = redirect_all_stdout)
     "Resistance is futile.\n"
     );
 }
+
+Test(Borg, test_Borg_Ship_fire, .init = redirect_all_stdout)
+{    
+    Borg::Ship	                Cube(30, 10);
+    Federation::Starfleet::Ship UssKreog(289, 132, "Kreog", 6, 3);
+	Federation::Ship 			Independent(150, 230, "Greok");
+
+    cr_assert(UssKreog.getShield() == 100);
+    Cube.fire(&UssKreog);
+    cr_assert(UssKreog.getShield() == 70);
+
+    cr_assert(Independent.getShield() == 100);
+    Cube.fire(&Independent);
+    cr_assert(Independent.getShield() == 70);
+
+    cr_assert_stdout_eq_str(
+    "We are the Borgs."
+    " Lower your shields and surrender yourselves unconditionally.\n"
+    "Your biological characteristics and technologies will be assimilated.\n"
+    "Resistance is futile.\n"
+    "The ship USS Kreog has been finished.\n"
+    "It is 289 m in length and 132 m in width.\n"
+    "It can go to Warp 6!\n"
+    "Weapons are set: 3 torpedoes ready\n"
+    "The independent ship Greok just finished its construction.\n"
+    "It is 150 m in length and 230 m in width.\n"
+    "Firing on target with 30 GW frequency.\n"
+    "Firing on target with 30 GW frequency.\n"
+    );
+}

@@ -118,19 +118,19 @@ bool            Federation::Starfleet::Ship::move(void)
     return move(_maxWarp, _home);
 }
 
-int             Federation::Starfleet::Ship::getShield(void) const
-{
-    return _shield;
-}
-
 int             Federation::Starfleet::Ship::getTorpedo(void) const
 {
     return _photonTorpedo;
 }
 
-void            Federation::Starfleet::Ship::setShield(int sheild)
+int             Federation::Starfleet::Ship::getShield(void) const
 {
-    _shield = sheild;
+    return _shield;
+}
+
+void            Federation::Starfleet::Ship::setShield(int shield)
+{
+    _shield = shield;
 }
 
 void            Federation::Starfleet::Ship::setTorpedo(int torpedo)
@@ -216,7 +216,8 @@ void            Federation::Starfleet::Captain::setAge(int age)
 
 Federation::Ship::Ship(int length, int width, std::string name)
                 :   _length(length), _width(width), _name(name), 
-                    _maxWarp(1), _core(nullptr), _home(VULCAN), _location(VULCAN)
+                    _maxWarp(1), _core(nullptr), _home(VULCAN), _location(VULCAN),
+                    _shield(100)
 {
     std::cout   << "The independent ship "
                 << _name << " just finished its construction."
@@ -296,6 +297,16 @@ bool            Federation::Ship::move(void)
 WarpSystem::Core    *Federation::Ship::getCore(void) const
 {
     return _core;
+}
+
+int             Federation::Ship::getShield(void) const
+{
+    return _shield;
+}
+
+void            Federation::Ship::setShield(int shield)
+{
+    _shield = shield;
 }
 // FEDERATION::SHIP
 /////////////////////////////////////////////////////////////////////////////////////////

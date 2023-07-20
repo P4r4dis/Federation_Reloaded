@@ -94,3 +94,21 @@ void            Borg::Ship::setRepair(short repair)
 {
     _repair = repair;
 }
+
+void            Borg::Ship::fire(Federation::Starfleet::Ship *target)
+{
+    std::cout   << "Firing on target with " << _weaponFrequency 
+                << " GW frequency." << std::endl;
+    target->setShield(target->getShield() - _weaponFrequency);
+    if (target->getShield() < 0)
+        target->setShield(0);
+}
+
+void            Borg::Ship::fire(Federation::Ship *target)
+{
+    std::cout   << "Firing on target with " << _weaponFrequency 
+                << " GW frequency." << std::endl;
+    target->setShield(target->getShield() - _weaponFrequency);
+    if (target->getShield() < 0)
+        target->setShield(0);
+}
