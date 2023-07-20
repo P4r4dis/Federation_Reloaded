@@ -1,7 +1,7 @@
 #include "../test_include/test_Borg.hpp"
 
 Borg::Ship::Ship(void) :    _side(300), _maxWarp(9), _core(nullptr), 
-                            _home(UNICOMPLEX), _location(_home)
+                            _home(UNICOMPLEX), _location(_home), _sheild(100)
 
 {
     std::cout   << "We are the Borgs."
@@ -61,4 +61,14 @@ Destination     Borg::Ship::getHome(void) const
 Destination     Borg::Ship::getLocation(void) const
 {
     return _location;
+}
+
+int             Borg::Ship::getSheild(void) const
+{
+    return _sheild;
+}
+
+void            Borg::Ship::setSheild(int sheild)
+{
+    _sheild = sheild;
 }

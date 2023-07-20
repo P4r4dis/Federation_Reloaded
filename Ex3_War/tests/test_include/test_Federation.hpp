@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "test_WarpSystem.hpp"
+#include "test_Borg.hpp"
 #include "Destination.hpp"
 
 namespace Federation
@@ -45,6 +46,9 @@ namespace                                       Federation
                 bool                            move(int warp);
                 bool                            move(Destination d);
                 bool                            move(void);
+
+                void                            fire(Borg::Ship *target);
+                void                            fire(int torpedoes, Borg::Ship *target);
 
             private:
                 int                             _length;

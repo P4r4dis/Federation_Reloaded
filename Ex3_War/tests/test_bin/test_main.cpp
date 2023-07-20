@@ -190,7 +190,7 @@ Test(Federation_Starfleet_Ensign, test_Ensign_constructor, .init = redirect_all_
 // Test(Main, test_main, .init = redirect_all_stdout)
 // {
 // 	Federation::Starfleet::Ship 		UssKreog(289, 132, "Kreog", 6);
-// 	Federation::Starfleet::Captain 		James("James T. Kirk");
+	// Federation::Starfleet::Captain 		James("James T. Kirk");
 // 	Federation::Starfleet::Ensign	 	Ensign("Pavel Chekov");
 // 	WarpSystem::QuantumReactor 			QR;
 // 	WarpSystem::QuantumReactor 			QR2;
@@ -349,5 +349,61 @@ Test(Federation, test_Federation_Starfleet_Ship_constructorV2, .init = redirect_
         "The ship USS Entreprise has been finished.\n"
         "It is 289 m in length and 132 m in width.\n"
         "It can go to Warp 6!\n"
+    );
+}
+
+
+Test(Federation, test_Federation_Starfleet_Ship_fire, .init = redirect_all_stdout)
+{
+    Federation::Starfleet::Ship UssKreog(289, 132, "Kreog", 6, 3);
+	Federation::Starfleet::Captain 		James("James T. Kirk");
+    UssKreog.promote(&James);
+    Borg::Ship borg;
+
+
+    cr_assert(borg.getSheild() == 100);
+    UssKreog.fire(&borg);
+    cr_assert(borg.getSheild() == 50);
+    cr_assert(UssKreog.getTorpedo() == 2);
+    UssKreog.fire(&borg);
+    cr_assert(borg.getSheild() == 0);
+    cr_assert(UssKreog.getTorpedo() == 1);
+    UssKreog.fire(&borg);
+    cr_assert(borg.getSheild() == 0);
+    cr_assert(UssKreog.getTorpedo() == 0);
+    UssKreog.fire(&borg);
+
+    Federation::Starfleet::Ship UssKreog2(289, 132, "Kreog", 6, 3);
+	Federation::Starfleet::Captain 		James2("James T. Kirk");
+    UssKreog2.promote(&James2);
+
+    UssKreog2.fire(3, &borg);
+    cr_assert(borg.getSheild() == 0);
+    cr_assert(UssKreog.getTorpedo() == 0);
+    UssKreog2.fire(3, &borg);
+
+	cr_assert_stdout_eq_str(
+        "The ship USS Kreog has been finished.\n"
+        "It is 289 m in length and 132 m in width.\n"
+        "It can go to Warp 6!\n"
+        "Weapons are set: 3 torpedoes ready\n"
+        "James T. Kirk: I'm glad to be the captain of the USS Kreog.\n"
+        "We are the Borgs."
+        " Lower your shields and surrender yourselves unconditionally.\n"
+        "Your biological characteristics and technologies will be assimilated.\n"
+        "Resistance is futile.\n"
+        "Kreog: Firing on target. 2 torpedoes remaining.\n"
+        "Kreog: Firing on target. 1 torpedoes remaining.\n"
+        "Kreog: Firing on target. 0 torpedoes remaining.\n"
+        "Kreog: No more torpedo to fire, James T. Kirk!\n"
+        "Kreog: No enough torpedoes to fire, James T. Kirk!\n"
+        "The ship USS Kreog has been finished.\n"
+        "It is 289 m in length and 132 m in width.\n"
+        "It can go to Warp 6!\n"
+        "Weapons are set: 3 torpedoes ready\n"
+        "James T. Kirk: I'm glad to be the captain of the USS Kreog.\n"
+        "Kreog: Firing on target. 0 torpedoes remaining.\n"
+        "Kreog: No more torpedo to fire, James T. Kirk!\n"
+        "Kreog: No enough torpedoes to fire, James T. Kirk!\n"
     );
 }

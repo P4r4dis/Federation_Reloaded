@@ -138,6 +138,52 @@ void            Federation::Starfleet::Ship::setTorpedo(int torpedo)
     _photonTorpedo = torpedo;
 }
 
+void            Federation::Starfleet::Ship::fire(Borg::Ship *target)
+{
+    if (_photonTorpedo > 0)
+    {
+        _photonTorpedo -= 1;
+        std::cout   << _name << ": Firing on target. "
+                    <<  _photonTorpedo << " torpedoes remaining." << std::endl;
+        target->setSheild(target->getSheild() - 50 * 1);
+        if (target->getSheild() < 0)
+            target->setSheild(0);
+        if (_photonTorpedo == 0)
+        {
+            std::cout   << _name << ": No more torpedo to fire, "
+                        << _captain->getName() << "!" << std::endl;
+        }
+    }
+    else
+    {
+        std::cout   << _name << ": No enough torpedoes to fire, "
+                    << _captain->getName() << "!" << std::endl;
+    }
+}
+
+void            Federation::Starfleet::Ship::fire(int torpedoes, Borg::Ship *target)
+{
+    if (_photonTorpedo >= torpedoes)
+    {
+        _photonTorpedo -= torpedoes;
+        std::cout   << _name << ": Firing on target. "
+                    <<  _photonTorpedo << " torpedoes remaining." << std::endl;
+        target->setSheild(target->getSheild() - 50 * torpedoes);
+        if (target->getSheild() < 0)
+            target->setSheild(0);
+        if (_photonTorpedo == 0)
+        {
+            std::cout   << _name << ": No more torpedo to fire, "
+                        << _captain->getName() << "!" << std::endl;
+        }
+    }
+    else
+    {
+        std::cout   << _name << ": No enough torpedoes to fire, "
+                    << _captain->getName() << "!" << std::endl;
+    }
+}
+
 // FEDERATION::STARFLEET::SHIP
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
