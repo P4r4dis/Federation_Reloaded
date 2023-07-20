@@ -407,3 +407,20 @@ Test(Federation, test_Federation_Starfleet_Ship_fire, .init = redirect_all_stdou
         "Kreog: No enough torpedoes to fire, James T. Kirk!\n"
     );
 }
+
+Test(Ship, test_Federation_Ship_getCore, .init = redirect_all_stdout)
+{
+	Federation::Ship 				Independent(150, 230, "Greok");
+	WarpSystem::QuantumReactor 		QR2;
+	WarpSystem::Core 				core2(&QR2);
+
+    Independent.setupCore(&core2);
+    cr_assert(Independent.getCore() != nullptr);
+    cr_assert(Independent.getCore()->checkReactor()->isStable() == true);
+
+    cr_assert_stdout_eq_str(
+    "The independent ship Greok just finished its construction.\n"
+    "It is 150 m in length and 230 m in width.\n"
+    "Greok: The core is set.\n"
+    );
+}

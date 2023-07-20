@@ -99,13 +99,14 @@ namespace                                       Federation
 
             void                                setupCore(WarpSystem::Core *core);
             void                                checkCore(void);
-
+            WarpSystem::Core                    *getCore(void) const;
             Destination                         getHome(void) const;
             Destination                         getLocation(void) const;
             bool                                move(int warp, Destination d);
             bool                                move(int warp);
             bool                                move(Destination d);
             bool                                move();
+
 
         private:
             int                                 _length;
