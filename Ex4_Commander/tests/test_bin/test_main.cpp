@@ -495,7 +495,7 @@ Test(Borg, test_Borg_Ship_repair, .init = redirect_all_stdout)
 // 	UssKreog.setupCore(&core);
 // 	UssKreog.checkCore();
 // 	UssKreog.promote(&James);
-// 	Borg::Ship	 						Cube;
+	// Borg::Ship	 						Cube;
 // 	Cube.setupCore(&core2);
 // 	Cube.checkCore();
 //     cr_assert(UssKreog.getHome() == EARTH);
@@ -604,5 +604,39 @@ Test(Admiral, test_Federation_Starfleet_Admiral_move, .init = redirect_all_stdou
         "It can go to Warp 6!\n"
         "Weapons are set: 3 torpedoes ready.\n"
         "USS Kreog: The core is set.\n"
+    );
+}
+
+
+Test(Admiral, test_Federation_Starfleet_Admiral_fire, .init = redirect_all_stdout)
+{
+    Federation::Starfleet::Admiral      admiral("Paradis");
+    Federation::Starfleet::Ship         UssKreog(289, 132, "Kreog", 6, 3);
+	Borg::Ship	 						Cube;
+
+	// WarpSystem::QuantumReactor 			QR;
+	// WarpSystem::Core 					core(&QR);
+    
+    // cr_assert(admiral.getName() == "Paradis");
+
+    // UssKreog.setupCore(&core);
+
+    // cr_assert(admiral.move(&UssKreog, VULCAN)  == VULCAN);
+    // cr_assert(UssKreog.getLocation() == VULCAN);
+
+    cr_assert(Cube.getShield() == 100);
+    admiral.fire(&UssKreog, &Cube);
+    cr_assert(Cube.getShield() == 50);
+    cr_assert_stdout_eq_str(
+    "Admiral Paradis ready for action.\n"
+    "The ship USS Kreog has been finished.\n"
+    "It is 289 m in length and 132 m in width.\n"
+    "It can go to Warp 6!\n"
+    "Weapons are set: 3 torpedoes ready.\n"
+    "We are the Borgs."
+    " Lower your shields and surrender yourselves unconditionally.\n"
+    "Your biological characteristics and technologies will be assimilated.\n"
+    "Resistance is futile.\n"
+    "On order from Admiral Paradis: Kreog: Firing on target. 2 torpedoes remaining.\n"
     );
 }
