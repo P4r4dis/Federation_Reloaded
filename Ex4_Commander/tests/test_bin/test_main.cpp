@@ -9,6 +9,7 @@
 #include "../test_include/test_WarpSystem.hpp"
 #include "../test_include/test_Borg.hpp"
 #include "../test_include/test_Admiral.hpp"
+#include "../test_include/test_BorgQueen.hpp"
 
 void    redirect_all_stdout(void)
 {
@@ -638,5 +639,24 @@ Test(Admiral, test_Federation_Starfleet_Admiral_fire, .init = redirect_all_stdou
     "Your biological characteristics and technologies will be assimilated.\n"
     "Resistance is futile.\n"
     "On order from Admiral Paradis: Kreog: Firing on target. 2 torpedoes remaining.\n"
+    );
+}
+
+Test(BorgQueen, test_Borg_BorgQueenl_move, .init = redirect_all_stdout)
+{
+    Borg::BorgQueen                     bQ;
+    Borg::Ship                          Cube;
+    WarpSystem::QuantumReactor  QR;
+    WarpSystem::Core 			core(&QR);
+    Cube.setupCore(&core);
+
+    cr_assert(bQ.move(&Cube, VULCAN) == true);
+    cr_assert(Cube.getLocation() == VULCAN);
+
+    cr_assert_stdout_eq_str(
+    "We are the Borgs."
+    " Lower your shields and surrender yourselves unconditionally.\n"
+    "Your biological characteristics and technologies will be assimilated.\n"
+    "Resistance is futile.\n"
     );
 }
