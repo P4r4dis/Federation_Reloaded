@@ -1,6 +1,8 @@
 #include "../include/Federation.hpp"
 #include "../include/WarpSystem.hpp"
 #include "../include/Borg.hpp"
+#include "../include/Admiral.hpp"
+#include "../include/BorgQueen.hpp"
 
 int	main()
 {
@@ -54,5 +56,15 @@ int	main()
     Cube.repair();
     UssKreog.fire(&Cube);
     Cube.repair();
+
+    Federation::Starfleet::Admiral     admiral("Paradis");
+    admiral.move(&UssKreog, VULCAN);
+    admiral.fire(&UssKreog, &Cube);
+
+    Borg::BorgQueen                     bQ;
+    bQ.move(&Cube, VULCAN);
+    bQ.fire(&Cube, &UssKreog);
+    bQ.fire(&Cube, &Independant);
+
 	return 0;
 }

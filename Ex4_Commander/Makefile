@@ -17,6 +17,8 @@ CPPFLAGS	+= -Wall -Wextra -Werror $(INCFLAGS) -W -std=c++23
 SRCS		=	$(SRC_PATH)/Federation.cpp \
 				$(SRC_PATH)/WarpSystem.cpp \
 				$(SRC_PATH)/Borg.cpp \
+				$(SRC_PATH)/BorgQueen.cpp \
+				$(SRC_PATH)/Admiral.cpp \
 				$(BIN_PATH)/main.cpp
 
 SRC_TEST	=	$(TST_PATH)/$(NAME)_test.cpp

@@ -2,7 +2,7 @@
     #define                         __BORGQUEEN__
 
 #include <iostream>
-#include "test_Borg.hpp"
+#include "Borg.hpp"
 
 namespace                           Borg
 {

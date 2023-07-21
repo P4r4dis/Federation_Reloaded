@@ -646,6 +646,8 @@ Test(BorgQueen, test_Borg_BorgQueenl_move, .init = redirect_all_stdout)
 {
     Borg::BorgQueen                     bQ;
     Borg::Ship                          Cube;
+    Federation::Starfleet::Ship         UssKreog(289, 132, "Kreog", 6, 3);
+
     WarpSystem::QuantumReactor  QR;
     WarpSystem::Core 			core(&QR);
     Cube.setupCore(&core);
@@ -658,5 +660,39 @@ Test(BorgQueen, test_Borg_BorgQueenl_move, .init = redirect_all_stdout)
     " Lower your shields and surrender yourselves unconditionally.\n"
     "Your biological characteristics and technologies will be assimilated.\n"
     "Resistance is futile.\n"
+    "The ship USS Kreog has been finished.\n"
+    "It is 289 m in length and 132 m in width.\n"
+    "It can go to Warp 6!\n"
+    "Weapons are set: 3 torpedoes ready.\n"
+    );
+}
+
+Test(BorgQueen, test_Borg_BorgQueenl_fire, .init = redirect_all_stdout)
+{
+    Borg::BorgQueen                     bQ;
+    Borg::Ship                          Cube;
+    Federation::Starfleet::Ship         UssKreog(289, 132, "Kreog", 6, 3);
+    Federation::Ship                    Inde(150, 230, "Greok");
+
+    cr_assert(UssKreog.getShield() == 100);
+    bQ.fire(&Cube, &UssKreog);
+    cr_assert(UssKreog.getShield() == 80);
+
+    cr_assert(Inde.getShield() == 100);
+    bQ.fire(&Cube, &Inde);
+    cr_assert(Inde.getShield() == 80);
+    cr_assert_stdout_eq_str(
+    "We are the Borgs."
+    " Lower your shields and surrender yourselves unconditionally.\n"
+    "Your biological characteristics and technologies will be assimilated.\n"
+    "Resistance is futile.\n"
+    "The ship USS Kreog has been finished.\n"
+    "It is 289 m in length and 132 m in width.\n"
+    "It can go to Warp 6!\n"
+    "Weapons are set: 3 torpedoes ready.\n"
+    "The independent ship Greok just finished its construction.\n"
+    "It is 150 m in length and 230 m in width.\n"
+    "Firing on target with 20 GW frequency.\n"
+    "Firing on target with 20 GW frequency.\n"
     );
 }

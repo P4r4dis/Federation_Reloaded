@@ -1,4 +1,4 @@
-#include "../test_include/test_BorgQueen.hpp"
+#include "../include/BorgQueen.hpp"
 
 namespace   Borg
 {
